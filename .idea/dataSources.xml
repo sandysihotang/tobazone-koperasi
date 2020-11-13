@@ -19,5 +19,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://ec2-54-159-112-44.compute-1.amazonaws.com:5432/d7mkkup5jragm1</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="Tobazone-koperasi" uuid="b2cc1b3f-3ebc-4726-a396-2c140b62538e">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-156-85-145.compute-1.amazonaws.com:5432/d65fj44amlj92q</jdbc-url>
+    </data-source>
   </component>
 </project>
