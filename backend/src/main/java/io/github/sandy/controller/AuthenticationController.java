@@ -102,6 +102,11 @@ public class AuthenticationController {
         return userDetailRepository.findByRole();
     }
 
+    @RequestMapping(value = "/get-akun-pending", method = RequestMethod.GET)
+    public List<Map<String, Object>> getAkunPending() {
+        return userDetailRepository.findByRole();
+    }
+
     @RequestMapping(value = "/api/jeniskoperasi", method = RequestMethod.GET)
     public Integer getJenisKoperasi(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
@@ -224,6 +229,11 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/api/terimaacc", method = RequestMethod.POST)
     public void terima(@RequestBody Requestbody requestbody) throws GeneralSecurityException, IOException, MessagingException {
+        userDetailService.setEnableAcc(requestbody.getId());
+    }
+
+    @RequestMapping(value = "/terimaacc", method = RequestMethod.POST)
+    public void terimaAcoount(@RequestBody Requestbody requestbody) throws GeneralSecurityException, IOException, MessagingException {
         userDetailService.setEnableAcc(requestbody.getId());
     }
 }

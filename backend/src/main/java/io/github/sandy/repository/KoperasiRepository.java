@@ -23,6 +23,26 @@ public interface KoperasiRepository extends JpaRepository<Koperasi, Integer> {
     )
     List<Map<String, Object>> findByIsHaveKoperasi();
 
+    @Query(
+            value = "SELECT nama_koperasi, koperasi.id, jenis_koperasi, nama_pendiri, alamat_koperasi, " +
+                    "tahun_berdiri_koperasi, koperasi.email, no_izin_koperasi, users.have_koperasi,logo_koperasi FROM koperasi " +
+                    "INNER JOIN users " +
+                    "ON users.id = koperasi.id_user " +
+                    "WHERE users.have_koperasi = 3",
+            nativeQuery = true
+    )
+    List<Map<String, Object>> findByIsHaveKoperasiActive();
+
+    @Query(
+            value = "SELECT nama_koperasi, koperasi.id, jenis_koperasi, nama_pendiri, alamat_koperasi, " +
+                    "tahun_berdiri_koperasi, koperasi.email, no_izin_koperasi, users.have_koperasi,logo_koperasi FROM koperasi " +
+                    "INNER JOIN users " +
+                    "ON users.id = koperasi.id_user " +
+                    "WHERE users.have_koperasi = 2",
+            nativeQuery = true
+    )
+    List<Map<String, Object>> findByIsHaveKoperasiNotActive();
+
     @Modifying(clearAutomatically = true)
     @Query(value = "INSERT INTO koperasi (alamat_koperasi,nama_koperasi,jenis_koperasi, nama_pendiri, " +
             "no_izin_koperasi, tahun_berdiri_koperasi,email, id_user, logo_koperasi) VALUES (?1, ?2,?3,?4,?5,?6,?7,?8,?9)", nativeQuery = true)

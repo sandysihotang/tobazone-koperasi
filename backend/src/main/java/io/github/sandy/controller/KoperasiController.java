@@ -156,6 +156,68 @@ public class KoperasiController {
         return data;
     }
 
+    @RequestMapping(value = "/get-koperasi-aktif", method = RequestMethod.GET)
+    public List<Map<String, Object>> getKoperasiAktif() throws Exception {
+        List<Map<String, Object>> data = new ArrayList<>();
+        List<Map<String, Object>> koperasis = koperasiRepository.findByIsHaveKoperasiActive();
+        for (Map<String, Object> koperasi : koperasis) {
+            Map<String, Object> res = new HashMap<>();
+            res.put("namaKoperasi", koperasi.get("nama_koperasi"));
+            res.put("id", koperasi.get("id"));
+            res.put("jenisKoperasi", koperasi.get("jenis_koperasi"));
+            res.put("namaPendiri", koperasi.get("nama_pendiri"));
+            res.put("alamatKoperasi", koperasi.get("alamat_koperasi"));
+            res.put("tahunBerdiriKoperasi", koperasi.get("tahun_berdiri_koperasi"));
+            res.put("email", koperasi.get("email"));
+            res.put("noIzinKoperasi", koperasi.get("no_izin_koperasi"));
+            res.put("haveKoperasi", koperasi.get("have_koperasi"));
+            if (koperasi.get("logo_koperasi") != null) {
+                DriveQuickstart driveQuickstart = new DriveQuickstart();
+                InputStream files = driveQuickstart.getFile((String) koperasi.get("logo_koperasi"));
+//                FileInputStream file = new FileInputStream(files.get);
+//                String ss = files.getFullFileExtension();
+//                GenericUrl url = new GenericUrl();
+                res.put("logoKoperasi", IOUtils.toByteArray(files));
+                System.out.println();
+            } else {
+                res.put("logoKoperasi", null);
+            }
+            data.add(res);
+        }
+        return data;
+    }
+
+    @RequestMapping(value = "/get-koperasi-tidak-aktif", method = RequestMethod.GET)
+    public List<Map<String, Object>> getKoperasiTidakAktif() throws Exception {
+        List<Map<String, Object>> data = new ArrayList<>();
+        List<Map<String, Object>> koperasis = koperasiRepository.findByIsHaveKoperasiNotActive();
+        for (Map<String, Object> koperasi : koperasis) {
+            Map<String, Object> res = new HashMap<>();
+            res.put("namaKoperasi", koperasi.get("nama_koperasi"));
+            res.put("id", koperasi.get("id"));
+            res.put("jenisKoperasi", koperasi.get("jenis_koperasi"));
+            res.put("namaPendiri", koperasi.get("nama_pendiri"));
+            res.put("alamatKoperasi", koperasi.get("alamat_koperasi"));
+            res.put("tahunBerdiriKoperasi", koperasi.get("tahun_berdiri_koperasi"));
+            res.put("email", koperasi.get("email"));
+            res.put("noIzinKoperasi", koperasi.get("no_izin_koperasi"));
+            res.put("haveKoperasi", koperasi.get("have_koperasi"));
+            if (koperasi.get("logo_koperasi") != null) {
+                DriveQuickstart driveQuickstart = new DriveQuickstart();
+                InputStream files = driveQuickstart.getFile((String) koperasi.get("logo_koperasi"));
+//                FileInputStream file = new FileInputStream(files.get);
+//                String ss = files.getFullFileExtension();
+//                GenericUrl url = new GenericUrl();
+                res.put("logoKoperasi", IOUtils.toByteArray(files));
+                System.out.println();
+            } else {
+                res.put("logoKoperasi", null);
+            }
+            data.add(res);
+        }
+        return data;
+    }
+
     @RequestMapping(value = "/api/getlabapengeluaranpemasukanmonth", method = RequestMethod.GET)
     public Map<String, Object> getLabaPengeluranPemasukan(HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
