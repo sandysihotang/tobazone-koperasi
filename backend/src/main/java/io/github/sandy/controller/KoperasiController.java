@@ -111,6 +111,24 @@ public class KoperasiController {
         return new ResponseEntity<>(new Err(200, ""), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/api/kirim-bukti", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Err> kirimBukti(@ModelAttribute Requestbody requestbody, HttpServletRequest request) throws Exception {
+        Principal principal = request.getUserPrincipal();
+        String user = principal.getName();
+        koperasiService.kirimBukti(requestbody, user);
+
+        return new ResponseEntity<>(new Err(200, ""), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/aktifkan-koperasi", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Err> aktifkankoperasi(@RequestBody Requestbody requestbody, HttpServletRequest request) throws Exception {
+        koperasiService.aktifkanKoperasi(requestbody);
+
+        return new ResponseEntity<>(new Err(200, ""), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/coba", method = RequestMethod.GET)
     public void cal() throws IOException, GeneralSecurityException, MessagingException {
         GmailQuickStart gmailQuickStart = new GmailQuickStart();
@@ -118,7 +136,7 @@ public class KoperasiController {
         Properties properties = new Properties();
         Session session = Session.getDefaultInstance(properties, null);
         MimeMessage mimeMessage = new MimeMessage(session);
-        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("TobaKo")});
+        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("Tobazone")});
         mimeMessage.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress("sandysihotang868@gmail.com")});
         mimeMessage.setSubject("Testing Subject");
         mimeMessage.setText("Testing Text");
@@ -187,6 +205,37 @@ public class KoperasiController {
         return data;
     }
 
+    @RequestMapping(value = "/layanan-koperasi", method = RequestMethod.GET)
+    public List<Map<String, Object>> getLayanan() throws Exception {
+        List<Map<String, Object>> data = new ArrayList<>();
+        List<Map<String, Object>> koperasis = koperasiRepository.getLayanan();
+        for (Map<String, Object> koperasi : koperasis) {
+            Map<String, Object> res = new HashMap<>();
+            res.put("namaKoperasi", koperasi.get("nama_koperasi"));
+            res.put("id", koperasi.get("id"));
+            res.put("jenisKoperasi", koperasi.get("jenis_koperasi"));
+            res.put("namaPendiri", koperasi.get("nama_pendiri"));
+            res.put("alamatKoperasi", koperasi.get("alamat_koperasi"));
+            res.put("tahunBerdiriKoperasi", koperasi.get("tahun_berdiri_koperasi"));
+            res.put("email", koperasi.get("email"));
+            res.put("noIzinKoperasi", koperasi.get("no_izin_koperasi"));
+            res.put("haveKoperasi", koperasi.get("have_koperasi"));
+            if (koperasi.get("gambar") != null) {
+                DriveQuickstart driveQuickstart = new DriveQuickstart();
+                InputStream files = driveQuickstart.getFile((String) koperasi.get("gambar"));
+//                FileInputStream file = new FileInputStream(files.get);
+//                String ss = files.getFullFileExtension();
+//                GenericUrl url = new GenericUrl();
+                res.put("buktiBayar", IOUtils.toByteArray(files));
+//                System.out.println();
+            } else {
+                res.put("buktiBayar", null);
+            }
+            data.add(res);
+        }
+        return data;
+    }
+
     @RequestMapping(value = "/get-koperasi-tidak-aktif", method = RequestMethod.GET)
     public List<Map<String, Object>> getKoperasiTidakAktif() throws Exception {
         List<Map<String, Object>> data = new ArrayList<>();
@@ -239,6 +288,12 @@ public class KoperasiController {
         Principal principal = request.getUserPrincipal();
         String user = principal.getName();
         koperasiService.changeStateKoperasi(requestbody.getId(), requestbody.getText(), requestbody.isState());
+        return new ResponseEntity<>(new Err(200, ""), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/ubah-status-koperasi", method = RequestMethod.POST)
+    public ResponseEntity<Err> UbahStatus(@RequestBody Requestbody requestbody, HttpServletRequest request) throws GeneralSecurityException, IOException, MessagingException {
+        koperasiService.ubahStatusKoperasi(requestbody.getId(), requestbody.isState());
         return new ResponseEntity<>(new Err(200, ""), HttpStatus.OK);
     }
 

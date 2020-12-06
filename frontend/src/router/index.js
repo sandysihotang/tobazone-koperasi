@@ -291,7 +291,7 @@ const routes = [
       {
         path: '/pendingactivation',
         component: () => import('../components/AuthenticatedUser/Koperasi/KSU/Layout/DaftarKoperasi/Layout/PendingActivation.vue'),
-      },
+      }
     ],
   },
   {

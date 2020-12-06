@@ -80,6 +80,29 @@ public class KoperasiService {
     LaporanKoperasiRepository laporanKoperasiRepository;
 
 
+    public Err kirimBukti(Requestbody requestbody, String uname) throws Exception {
+        Map<String, Object> user = userRepository.getUserUsername(uname);
+        Map<String, Object> koperasi = koperasiRepository.getKoperasiUserId((Integer) user.get("id"));
+        String path = saveImage(requestbody.getImage());
+        if (path != null) {
+            DriveQuickstart driveQuickstart = new DriveQuickstart();
+            File t = new File("");
+            File file = new File(t.getAbsolutePath() + path);
+            path = driveQuickstart.uploadLogo(file);
+            file.delete();
+        }
+        koperasiRepository.kirimbukti((Integer) koperasi.get("id"), 500000, path);
+        return new Err(200, "Kirim Bukti Berhasil");
+    }
+
+    public Err aktifkanKoperasi(Requestbody requestbody) {
+        Map<String, Object> idKoperasi = koperasiRepository.getKoperasiIdFromMaintenence(requestbody.getId());
+        Map<String, Object> koperasi = koperasiRepository.getKoperasiID((Integer) idKoperasi.get("id_koperasi"));
+        koperasiRepository.changeStatus((Integer) koperasi.get("id_user"));
+        koperasiRepository.changeStatusMaintenence((Integer) koperasi.get("id"));
+        return new Err(200, "Kirim Bukti Berhasil");
+    }
+
     public Err createKoperasi(Requestbody requestbody, String uname) throws Exception {
         Map<String, Object> user = userRepository.getUserUsername(uname);
         //Koperasi koperasi = new Koperasi();
@@ -141,6 +164,11 @@ public class KoperasiService {
         MailSender mailSender = new MailSender();
         mailSender.sendEmailSetStateKoperasi((String) koperasi.get("email"), text, (!state ? "Koperasi Telah Diaktifkan" : "Maaf Koperasi dinonaktifkan"));
 
+        userRepository.update((Integer) koperasi.get("id_user"), (!state ? 3 : 2));
+    }
+
+    public void ubahStatusKoperasi(int id, boolean state) {
+        Map<String, Object> koperasi = koperasiRepository.getKoperasiID(id);
         userRepository.update((Integer) koperasi.get("id_user"), (!state ? 3 : 2));
     }
 

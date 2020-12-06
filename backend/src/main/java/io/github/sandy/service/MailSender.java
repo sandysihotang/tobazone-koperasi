@@ -29,7 +29,7 @@ public class MailSender {
         Properties properties = new Properties();
         Session session = Session.getDefaultInstance(properties, null);
         MimeMessage mimeMessage = new MimeMessage(session);
-        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("TobaKo")});
+        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("Tobazone")});
         mimeMessage.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(email)});
         mimeMessage.setSubject("Account telah diaktifkan");
         mimeMessage.setText("Acoount anda telah diaktifkan oleh admin \n anda sudah dapat login kesistem");
@@ -41,7 +41,7 @@ public class MailSender {
         Properties properties = new Properties();
         Session session = Session.getDefaultInstance(properties, null);
         MimeMessage mimeMessage = new MimeMessage(session);
-        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("TobaKo")});
+        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("Tobazone")});
         mimeMessage.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(email)});
         mimeMessage.setSubject("Account Koperasi");
         mimeMessage.setText(message + "\n\n" + text);
@@ -53,7 +53,7 @@ public class MailSender {
         Properties properties = new Properties();
         Session session = Session.getDefaultInstance(properties, null);
         MimeMessage mimeMessage = new MimeMessage(session);
-        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("TobaKo")});
+        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("Tobazone")});
         mimeMessage.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(email)});
         mimeMessage.setSubject("Account Koperasi");
         mimeMessage.setText(message);
@@ -65,7 +65,7 @@ public class MailSender {
         Properties properties = new Properties();
         Session session = Session.getDefaultInstance(properties, null);
         MimeMessage mimeMessage = new MimeMessage(session);
-        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("TobaKo")});
+        mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("Tobazone")});
         mimeMessage.setRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(email)});
         mimeMessage.setSubject("Reset Password");
         char petik = '"';
