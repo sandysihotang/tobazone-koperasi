@@ -25,12 +25,12 @@
             </q-item-section>
             <q-item-section>Daftar Koperasi</q-item-section>
           </q-item>
-          <q-item clickable v-ripple :to="'/laporankoperasi'">
+          <!-- <q-item clickable v-ripple :to="'/laporankoperasi'">
             <q-item-section avatar>
               <q-icon color="primary" name="report"/>
             </q-item-section>
             <q-item-section>Laporan RAT</q-item-section>
-          </q-item>
+          </q-item> -->
         </q-list>
       </q-scroll-area>
     </q-drawer>

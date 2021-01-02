@@ -81,7 +81,7 @@
             </q-item-section>
             <q-item-section>Laporan</q-item-section>
           </q-item>
-          <q-expansion-item
+          <!-- <q-expansion-item
             expand-separator
             icon="send"
             label="Kirim Laporan Ke Dinas Koperasi Toba">
@@ -93,7 +93,7 @@
                 <q-item-section>Laporan Terkirim</q-item-section>
               </q-item>
             </q-list>
-          </q-expansion-item>
+          </q-expansion-item> -->
         </q-list>
       </q-scroll-area>
     </q-drawer>
