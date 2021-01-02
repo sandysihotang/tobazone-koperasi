@@ -142,7 +142,7 @@ public class AuthenticationController {
                 data.put("error", "Akun anda Sedang tidak aktif.");
             } else {
                 data.put("exist", false);
-                data.put("error", "Silahkan menunggu aktivasi dari DISKOPERINDAG");
+                data.put("error", "Silahkan menunggu aktivasi dari Admin");
             }
         } else {
             data.put("exist", true);
@@ -163,7 +163,7 @@ public class AuthenticationController {
                 data.put("error", "Akun anda sedang tidak aktif oleh Koperasi.");
             } else {
                 data.put("exist", false);
-                data.put("error", "Silahkan menunggu aktivasi dari DISKOPERINDAG");
+                data.put("error", "Silahkan menunggu aktivasi dari Admin");
             }
         } else {
             UUID unique_id = getUUID();

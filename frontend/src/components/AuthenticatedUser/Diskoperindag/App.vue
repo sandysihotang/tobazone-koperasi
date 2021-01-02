@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="left = !left"/>
         <q-toolbar-title>
-          Diskoperindag TOBA
+          Admin TOBA
         </q-toolbar-title>
         <q-btn flat round dense icon="fa fa-sign-out-alt" @click="logOut"/>
       </q-toolbar>
