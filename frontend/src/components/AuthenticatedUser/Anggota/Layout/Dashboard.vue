@@ -45,14 +45,14 @@
   import Home from './Home.vue';
   import Pinjaman from './Pinjaman.vue'
   import Simpanan from './Simpanan.vue'
-  import Report from './Laporan.vue'
+  // import Report from './Laporan.vue'
 
   export default {
     components: {
       Home,
       Pinjaman,
       Simpanan,
-      Report
+      // Report
     },
     data() {
       return {
