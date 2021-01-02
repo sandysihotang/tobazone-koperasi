@@ -15,9 +15,9 @@
           <q-tab-panel name="movies">
             <Pinjaman/>
           </q-tab-panel>
-          <q-tab-panel name="report">
+          <!-- <q-tab-panel name="report">
             <report/>
-          </q-tab-panel>
+          </q-tab-panel> -->
         </q-tab-panels>
       </q-card>
     </q-page-container>
@@ -35,7 +35,7 @@
         <q-tab name="mails" icon="home" label="Home"/>
         <q-tab name="alarms" icon="alarm" label="Simpanan"/>
         <q-tab name="movies" icon="movie" label="Pinjaman"/>
-        <q-tab name="report" icon="report" label="Laporan"/>
+        <!-- <q-tab name="report" icon="report" label="Laporan"/> -->
       </q-tabs>
     </q-footer>
   </div>
