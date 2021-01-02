@@ -173,7 +173,7 @@
           this.$swal({
             position: 'center',
             type: 'error',
-            title: 'Lengkapi data Untuk kebutuhan Diskoperindag',
+            title: 'Lengkapi data Untuk kebutuhan Admin',
             showConfirmButton: false,
             timer: 1500,
           });
